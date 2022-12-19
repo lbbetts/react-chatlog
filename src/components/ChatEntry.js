@@ -1,6 +1,5 @@
 import React from 'react';
 import './ChatEntry.css';
-import './TimeStamp.js';
 import PropTypes from 'prop-types';
 import TimeStamp from './TimeStamp.js';
 
@@ -20,7 +19,6 @@ const ChatEntry = (props) => {
 };
 
 ChatEntry.propTypes = {
-  //Fill with correct proptypes
   id: PropTypes.number,
   sender: PropTypes.string,
   body: PropTypes.string,
