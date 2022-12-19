@@ -35,7 +35,7 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.chat-entry .entry-time {
+.chat-entry .entry-time e{
   color: #bbb;
   font-size: x-small;
   margin-bottom: 0.1rem;
