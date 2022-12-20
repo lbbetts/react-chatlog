@@ -9,20 +9,27 @@ const ChatEntry = (props) => {
   const changeLiked = () => {
       setIsLiked(!isLiked)
   }
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(1);
   const increaseLikeCount = () => {
       setLikeCount(likeCount+1)
+      // console.log(likeCount+1)
   }
   const decreaseLikeCount = () => {
     setLikeCount(likeCount-1)
+  //   console.log(likeCount-1)
 }
 
-  // const makeChanges = () => {
-  //   changeLiked() 
-  //   increaseLikeCount()
-  //   console.log(likeCount)
+  const makeChanges = () => {
+    changeLiked() 
+    if (isLiked){
+      increaseLikeCount()
+    }
+    else if (!isLiked){
+      decreaseLikeCount()
+    }
+    console.log(likeCount)
   
-  // }
+  }
 
   return (
     <div className="chat-entry local">
@@ -33,9 +40,9 @@ const ChatEntry = (props) => {
         <p className="entry-time">
           <TimeStamp time={props.timeStamp}></TimeStamp>
         </p>
-        <button className="like" onClick={ changeLiked }>
+        <button className="like" onClick={ makeChanges }>
           { isLiked ? '❤️' : '🤍' }
-          { isLiked ? increaseLikeCount : decreaseLikeCount }
+          {/* { isLiked ? increaseLikeCount : decreaseLikeCount } */}
         </button>
       </section>
     </div>
