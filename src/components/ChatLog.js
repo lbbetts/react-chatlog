@@ -4,6 +4,8 @@ import './ChatLog.css';
 // import './ChatEntry';
 import ChatEntry from './ChatEntry';
 import PropTypes from 'prop-types';
+import likeCount from './ChatEntry';
+
 
 const ChatLog = (props) => {
   const chatComponents = props.entries.map((entry, index) => {

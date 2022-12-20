@@ -5,11 +5,11 @@ import TimeStamp from './TimeStamp.js';
 import { useState } from 'react';
 
 const ChatEntry = (props) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(true);
   const changeLiked = () => {
       setIsLiked(!isLiked)
   }
-  const [likeCount, setLikeCount] = useState(1);
+  const [likeCount, setLikeCount] = useState(0);
   const increaseLikeCount = () => {
       setLikeCount(likeCount+1)
       // console.log(likeCount+1)
@@ -41,7 +41,7 @@ const ChatEntry = (props) => {
           <TimeStamp time={props.timeStamp}></TimeStamp>
         </p>
         <button className="like" onClick={ makeChanges }>
-          { isLiked ? '❤️' : '🤍' }
+          { isLiked ? '🤍': '❤️' } {likeCount}
           {/* { isLiked ? increaseLikeCount : decreaseLikeCount } */}
         </button>
       </section>
