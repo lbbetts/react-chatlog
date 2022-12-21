@@ -10,6 +10,7 @@ const ChatEntry = (props) => {
       id: props.id,
       sender: props.sender,
       body: props.body,
+      timeStamp: props.timeStamp,
       liked: !props.liked,
     };
 
@@ -40,6 +41,7 @@ ChatEntry.propTypes = {
   id: PropTypes.number.isRequired,
   sender: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
+  timeStamp: PropTypes.isRequired,
   liked: PropTypes.bool,
   onUpdate: PropTypes.func.isRequired,
 };
