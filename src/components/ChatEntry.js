@@ -3,28 +3,17 @@ import './ChatEntry.css';
 import PropTypes from 'prop-types';
 import TimeStamp from './TimeStamp.js';
 
-const ChatEntry = (props) => {
-  const onLikeClick = () => {
-    const updatedEntry = {
-      id: props.id,
-      sender: props.sender,
-      body: props.body,
-      timeStamp: props.timeStamp,
-      liked: !props.liked,
-    };
-    props.onUpdate(updatedEntry);
-  };
-
+const ChatEntry = ({ id, sender, body, timeStamp, liked, onLikeClicked }) => {
   return (
-    <div className="chat-entry local">
-      <h2 className="entry-name">{props.sender}</h2>
+    <div id={id} className="chat-entry local">
+      <h2 className="entry-name">{sender}</h2>
       <section className="entry-bubble">
-        <p>{props.body}</p>
-        <p className="entry-time">
-          <TimeStamp time={props.timeStamp}></TimeStamp>
-        </p>
-        <button className="like" onClick={onLikeClick}>
-          {props.liked ? '❤️' : '🤍'}
+        <p>{body}</p>
+        <div className="entry-time">
+          <TimeStamp time={timeStamp}></TimeStamp>
+        </div>
+        <button className="like" onClick={onLikeClicked}>
+          {liked ? '❤️' : '🤍'}
         </button>
       </section>
     </div>
@@ -35,9 +24,9 @@ ChatEntry.propTypes = {
   id: PropTypes.number.isRequired,
   sender: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  timeStamp: PropTypes.isRequired,
+  timeStamp: PropTypes.string.isRequired,
   liked: PropTypes.bool,
-  onUpdate: PropTypes.func.isRequired,
+  onLikeClicked: PropTypes.func.isRequired,
 };
 
 export default ChatEntry;
