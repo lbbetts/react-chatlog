@@ -6,42 +6,39 @@ import ChatLog from './components/ChatLog';
 import chatMessages from './data/messages.json';
 
 function App() {
-  const [entryData, setEntryData] = useState(chatMessages);
+  // const [entryData, setEntryData] = useState(chatMessages);
+  const [messages, setMessages] = useState(chatMessages);
+  const [likedMessages, setLikedMessages] = useState(new Set());
 
-  const [determineLikedState, setLikedState] = useState([]);
-  const addLiked = (indy) => {
-    setLikedState((oldState) => [...oldState, indy]);
-  };
-  const removeLiked = (indy) => {
-    setLikedState((oldState) => oldState.filter((item) => item !== indy));
-  };
-
-  const updateEntryData = (updatedEntry) => {
-    const entries = entryData.map((entry) => {
-      if (entry.id === updatedEntry.id) {
-        if (determineLikedState.size === 0) {
-          addLiked(entry.id);
-        } else if (determineLikedState.includes(entry.id)) {
-          removeLiked(entry.id);
-        } else {
-          addLiked(entry.id);
-        }
-        return updatedEntry;
+  const toggleLikeForMessage = (id) => {
+    setLikedMessages(likedMessages => {
+      if (likedMessages.has(id)) {
+        likedMessages.delete(id);
       } else {
-        return entry;
+        likedMessages.add(id)
       }
+      return likedMessages;
+    })
+    setMessages(messages => {
+      let newMessages = messages.map(message => {
+        if (message.id !== id) {
+          return message;
+        }
+        message.liked = !message.liked;
+        return message;
+      })
+      return newMessages;
     });
-    setEntryData(entries);
-  };
+  }
 
   return (
     <div id="App">
       <header>
         <h1>CHAT LOG</h1>
-        <h2>{determineLikedState.length} ❤️s</h2>
+        <h2>{likedMessages.size} ❤️s</h2>
       </header>
       <main>
-        <ChatLog entries={entryData} onUpdateEntry={updateEntryData}></ChatLog>
+        <ChatLog entries={messages} onLikeClicked={toggleLikeForMessage}></ChatLog>
         {/* Wave 01: Render one ChatEntry component
             Wave 02: Render ChatLog component */}
       </main>
